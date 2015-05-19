@@ -88,6 +88,11 @@ public class VipServlet extends HttpServlet {
 		}
 	}
 
+	@Override
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response, () -> new HttpDelete());
+	}
+
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 	/**
 	 * Handles the HTTP <code>GET</code> method.
@@ -100,6 +105,16 @@ public class VipServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response, () -> new HttpGet());
+	}
+
+	@Override
+	protected void doHead(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response, () -> new HttpHead());
+	}
+
+	@Override
+	protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response, () -> new HttpOptions());
 	}
 
 	/**
@@ -124,21 +139,6 @@ public class VipServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doTrace(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response, () -> new HttpTrace());
-	}
-
-	@Override
-	protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response, () -> new HttpOptions());
-	}
-
-	@Override
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response, () -> new HttpDelete());
-	}
-
-	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response, () -> {
 			HttpPut put = new HttpPut();
@@ -152,8 +152,8 @@ public class VipServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doHead(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response, () -> new HttpHead());
+	protected void doTrace(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response, () -> new HttpTrace());
 	}
 
 }
