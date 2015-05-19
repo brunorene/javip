@@ -1,2 +1,2 @@
 # javip
-A Vip developed in pure Java
+A VERY simple Vip developed in pure Java
