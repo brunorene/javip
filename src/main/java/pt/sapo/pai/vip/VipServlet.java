@@ -122,4 +122,38 @@ public class VipServlet extends HttpServlet {
 			return post;
 		});
 	}
+
+	@Override
+	protected void doTrace(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response, () -> new HttpTrace());
+	}
+
+	@Override
+	protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response, () -> new HttpOptions());
+	}
+
+	@Override
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response, () -> new HttpDelete());
+	}
+
+	@Override
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response, () -> {
+			HttpPut put = new HttpPut();
+			try {
+				put.setEntity(new InputStreamEntity(request.getInputStream()));
+			} catch (IOException ex) {
+				log.warn(null, ex);
+			}
+			return put;
+		});
+	}
+
+	@Override
+	protected void doHead(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response, () -> new HttpHead());
+	}
+
 }
