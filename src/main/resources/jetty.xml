@@ -2,9 +2,9 @@
 <!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
 
 <Configure id="Server" class="org.eclipse.jetty.server.Server">
-	<New id="solrHome"  class="org.eclipse.jetty.plus.jndi.EnvEntry">
+	<New id="servers"  class="org.eclipse.jetty.plus.jndi.EnvEntry">
 		<Arg>servers</Arg>
-		<Arg type="java.lang.String">10.135.8.205:8983,10.135.8.205:8984</Arg>
+		<Arg type="java.lang.String">localhost:8983,localhost:8984</Arg>
 		<Arg type="boolean">true</Arg>
 	</New>
 </Configure>
