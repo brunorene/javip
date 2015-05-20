@@ -127,28 +127,21 @@ public class VipServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response, () -> {
-			HttpPost post = new HttpPost();
-			try {
-				post.setEntity(new InputStreamEntity(request.getInputStream()));
-			} catch (IOException ex) {
-				log.warn(null, ex);
-			}
-			return post;
-		});
+		processRequest(request, response, withEntity(new HttpPost(), request));
+	}
+
+	private Supplier<HttpRequestBase> withEntity(HttpEntityEnclosingRequestBase method, HttpServletRequest request) {
+		try {
+			method.setEntity(new InputStreamEntity(request.getInputStream()));
+		} catch (IOException ex) {
+			log.warn(null, ex);
+		}
+		return () -> method;
 	}
 
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response, () -> {
-			HttpPut put = new HttpPut();
-			try {
-				put.setEntity(new InputStreamEntity(request.getInputStream()));
-			} catch (IOException ex) {
-				log.warn(null, ex);
-			}
-			return put;
-		});
+		processRequest(request, response, withEntity(new HttpPut(), request));
 	}
 
 	@Override
