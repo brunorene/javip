@@ -1,5 +1,5 @@
 # javip
-A VERY simple Vip developed in pure Java
+A VERY simple Load Balancer developed in pure Java
 
 ## How to run
 
